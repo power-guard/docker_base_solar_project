@@ -1,1 +1,6 @@
-# docker_base_project
+# PostgreSQL database configuration for local development
+POSTGRES_DB=your_local_database_name
+POSTGRES_USER=your_local_database_user
+POSTGRES_PASSWORD=your_local_database_password
+POSTGRES_HOST=postgres-db
+POSTGRES_PORT=5432
