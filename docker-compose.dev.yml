@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./project_backend
+      dockerfile: Dockerfile
+    container_name: django-backend-dev
+    volumes:
+      - ./project_backend:/app
+    ports:
+      - "8000:8000"
+    env_file: .env.dev
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./project_frontend
+      target: development
+      dockerfile: Dockerfile
+    container_name: react-frontend-dev
+    volumes:
+      - ./project_frontend:/app
+    ports:
+      - "3000:3000"
+    command: ["npm", "start"]
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:13
+    container_name: postgres-db-dev
+    volumes:
+      - postgres-db-dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: dev_database_user
+      POSTGRES_PASSWORD: 6tEmi05PGv6PGW
+      POSTGRES_DB: dev_database_name
+
+volumes:
+  postgres-db-dev:

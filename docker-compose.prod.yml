@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./project_backend
+      dockerfile: Dockerfile
+    container_name: django-backend-prod
+    ports:
+      - "8000:8000"
+    env_file: .env.prod
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./project_frontend
+      target: production
+      dockerfile: Dockerfile
+    container_name: react-frontend-prod
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:13
+    container_name: postgres-db-prod
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: your_user
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: your_db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - frontend
+
+volumes:
+  postgres_data:
