@@ -13,7 +13,7 @@ services:
     env_file: .env.dev
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
-      - db
+      - postgres
 
   frontend:
     build:
@@ -29,17 +29,20 @@ services:
     depends_on:
       - backend
 
-  db:
-    image: postgres:13
+  postgres:
+    image: postgres:15
     container_name: postgres-db-dev
-    volumes:
-      - postgres-db-dev:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: dev_database_user
       POSTGRES_PASSWORD: 6tEmi05PGv6PGW
       POSTGRES_DB: dev_database_name
+    volumes:
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      # - ./ssl-data:/var/lib/postgresql/ssl:ro
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
 
 volumes:
   postgres-db-dev:

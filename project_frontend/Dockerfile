@@ -1,5 +1,5 @@
 # Base stage for building the React app
-FROM node:16-slim AS base
+FROM node:alpine AS base
 
 # Set working directory
 WORKDIR /app
