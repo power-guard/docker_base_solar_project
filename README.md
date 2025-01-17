@@ -64,3 +64,21 @@ Remove all Docker volumes.
 To remove all unused containers, networks, images, and volumes, you can run the prune command:
  docker system prune -a --volumes -f
 **Warning**: This command will remove **everything**, including data volumes
+
+
+my formula is
+
+python manage.py dumpdata > datadump.json
+Change settings.py to your mysql
+Make sure you can connect on your mysql (permissions,etc)
+python manage.py migrate --run-syncdb
+Exclude contentype data with this snippet in shell
+
+python manage.py shell
+
+from django.contrib.contenttypes.models import ContentType
+ContentType.objects.all().delete()
+quit()
+
+python manage.py loaddata datadump.json
+

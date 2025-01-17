@@ -4,6 +4,7 @@ services:
   backend:
     build:
       context: ./project_backend
+      target: development
       dockerfile: Dockerfile
     container_name: django-backend-dev
     volumes:
@@ -22,9 +23,11 @@ services:
       dockerfile: Dockerfile
     container_name: react-frontend-dev
     volumes:
-      - ./project_frontend:/app
+      - ./project_frontend:/app # Mount React app folder for live reloading
+      - /app/node_modules  # Prevent overwriting node_modules
     ports:
       - "3000:3000"
+    env_file: .env.dev  # Pass environment variables
     command: ["npm", "start"]
     depends_on:
       - backend
@@ -39,10 +42,12 @@ services:
       POSTGRES_PASSWORD: 6tEmi05PGv6PGW
       POSTGRES_DB: dev_database_name
     volumes:
+      - postgres-db-dev:/var/lib/postgresql/data  # Explicitly use named volume
       - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
       - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf
       # - ./ssl-data:/var/lib/postgresql/ssl:ro
     command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf"]
 
 volumes:
-  postgres-db-dev:
+  postgres-db-dev:  # Define the named volume
+    name: solar_project_postgres_data  # Use a consistent name
