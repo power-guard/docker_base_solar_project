@@ -47,7 +47,7 @@ pg_conn = psycopg2.connect(
 )
 
 
-docker-compose -f docker-compose.dev.yml  down -v
+docker-compose -f docker-compose.dev.yml  down --rm
 
 
 1. **Stop and Remove All Containers**
