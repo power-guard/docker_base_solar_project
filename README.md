@@ -82,3 +82,10 @@ quit()
 
 python manage.py loaddata datadump.json
 
+
+
+
+
+psql -U dev_database_user -d dev_database_name
+
+

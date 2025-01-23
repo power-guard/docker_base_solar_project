@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTitle } from "../../hooks";
 
-import { AddMonthlyRevenues, AddMonthlyExpenses } from './updateUtilityData';
+import { AddMonthlyRevenues, AddMonthlyExpenses } from './updateUtilityDataList';
 
 
 export const AddUtilityData = () => {
