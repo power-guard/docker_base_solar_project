@@ -3,7 +3,7 @@ import { useCallback } from "react";
 
 // Define your constants
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const TOKEN = process.env.REACT_APP_API_TOKEN;
+const TOKEN = localStorage.getItem('token');
 const HEADERS = {
   Authorization: `Token ${TOKEN}`,
   'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const useCurtailmentAddData = () => {
       // console.log("API Endpoint:", apiEndPoint);
       // console.log("Selected Plant:", selectedPlant);
 
-      const CurtailmentAddUrl = `${BASE_URL}/${apiEndPoint}/`;
+      const CurtailmentAddUrl = `${BASE_URL}/core/${apiEndPoint}/`;
       const CurtailmentAddData = {
         plant_id: selectedPlant,
         date: date,

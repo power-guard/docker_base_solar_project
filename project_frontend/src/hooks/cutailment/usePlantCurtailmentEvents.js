@@ -23,13 +23,13 @@ export const usePlantCurtailmentEvents = (apiEndPoint, plantId, rd) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const yearMonth = rd || getLastYearMonth(); // Use provided `rd` or fallback to last month
 
   // Build the URL based on `plantId` and `yearMonth`
   const url = useMemo(() => {
-    return `${baseUrl}/${apiEndPoint}?rd=${yearMonth}${plantId ? `&plant_id=${plantId}` : ''}`;
+    return `${baseUrl}/core/${apiEndPoint}?rd=${yearMonth}${plantId ? `&plant_id=${plantId}` : ''}`;
   }, [baseUrl, apiEndPoint, yearMonth, plantId]);
 
   // Fetch data from the API

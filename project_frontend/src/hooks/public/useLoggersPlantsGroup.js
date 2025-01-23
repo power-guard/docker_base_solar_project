@@ -6,8 +6,8 @@ export const useLoggersPlantsGroup = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const token = process.env.REACT_APP_API_TOKEN;
-    const url = `${process.env.REACT_APP_BASE_URL}/loggers-plants-group`;
+    const token = localStorage.getItem('token');
+    const url = `${process.env.REACT_APP_BASE_URL}/core/loggers-plants-group`;
 
     useEffect(() => {
         const fetchData = async () => {

@@ -5,7 +5,7 @@ import { usePlantList } from "../index";
 
 // Define your constants
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const TOKEN = process.env.REACT_APP_API_TOKEN;
+const TOKEN = localStorage.getItem('token');
 const HEADERS = {
   Authorization: `Token ${TOKEN}`,
   'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ const getPreviousMonth = () => {
 
 // Define function to post data
 const postMonthlyRevenues = async (plant_id, used_electricity_kw, used_amount_jpy, tax_jpy, apiEndPoint) => {
-    const MonthlyRevenuesUrl = `${BASE_URL}/${apiEndPoint}/`;
+    const MonthlyRevenuesUrl = `${BASE_URL}/core/${apiEndPoint}/`;
 
     const MonthlyRevenuesData = {
         plant_id: plant_id,

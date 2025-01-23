@@ -9,11 +9,11 @@ export const useGetGisData = () => {
   const [loading, setLoading] = useState(true);
 
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
 
   // Construct the URL dynamically using useMemo to optimize performance
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const url = `${baseUrl}/power-plant-detail`;
+  const url = `${baseUrl}/core/power-plant-detail`;
 
   // Fetch data from the API using useEffect
   useEffect(() => {

@@ -18,7 +18,7 @@ export const UpdatePowerGen = () => {
   useTitle(title);
 
   const apiEndPoint = "logger-power-gen";
-  const token = process.env.REACT_APP_API_TOKEN; // Ensure your token is correctly set
+  const token = localStorage.getItem('token'); // Ensure your token is correctly set
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   // Initialize search parameters
@@ -65,7 +65,7 @@ export const UpdatePowerGen = () => {
     // console.log(`Updated Power Gen: ${updatedValue}`);
 
     try {
-      const updateUrl = `${baseUrl}/${apiEndPoint}/${id}/`; // Adjust the URL as needed
+      const updateUrl = `${baseUrl}/core/${apiEndPoint}/${id}/`; // Adjust the URL as needed
 
       // Send the PATCH request to the server to update `power_gen`
       const response = await axios.patch(updateUrl, {

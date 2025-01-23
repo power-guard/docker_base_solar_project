@@ -7,8 +7,8 @@ export const usePlantDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const token = process.env.REACT_APP_API_TOKEN;
-    const url = `${process.env.REACT_APP_BASE_URL}/${apiEndPoint}`;
+    const token = localStorage.getItem('token');
+    const url = `${process.env.REACT_APP_BASE_URL}/core/${apiEndPoint}`;
 
     useEffect(() => {
         const fetchData = async () => {

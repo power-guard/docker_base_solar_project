@@ -28,7 +28,7 @@ export const useMonthlyData = (apiEndPoint, searchParams) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const { formattedDate, selectedLoggers, selectedGroup } = searchParams;
@@ -41,7 +41,7 @@ export const useMonthlyData = (apiEndPoint, searchParams) => {
   const groupParam = selectedGroup || '';
 
   const buildUrl = useCallback((yearMonth) =>
-    `${baseUrl}/${apiEndPoint}?year_month=${yearMonth}` +
+    `${baseUrl}/core/${apiEndPoint}?year_month=${yearMonth}` +
     `${loggerParam ? `&logger_name=${loggerParam}` : ''}` +
     `${groupParam ? `&group_name=${groupParam}` : ''}`,
     [apiEndPoint, baseUrl, loggerParam, groupParam]

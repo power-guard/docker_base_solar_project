@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 
 // Define your constants
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const TOKEN = process.env.REACT_APP_API_TOKEN;
+const TOKEN = localStorage.getItem('token');
 const HEADERS = {
   Authorization: `Token ${TOKEN}`,
   'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const useCurtailmentUpdateData = () => {
         return { success: true, message: "No changes to update." };
       }
 
-      const CurtailmentUpdateUrl = `${BASE_URL}/${apiEndPoint}/${id}/`;
+      const CurtailmentUpdateUrl = `${BASE_URL}/core/${apiEndPoint}/${id}/`;
 
       setLoading(true);
       setError(null);

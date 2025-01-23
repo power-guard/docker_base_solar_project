@@ -9,13 +9,13 @@ export const useGisList = (apiEndPoint, selectedData) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false); // No loading by default
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
 
   // Construct the URL dynamically using useMemo to optimize performance
   const url = useMemo(() => {
     if (!selectedDate || !selectedSystem) return null; // Return null if conditions are not met
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    return `${baseUrl}/${apiEndPoint}?year_month=${selectedDate}&power_plant=${selectedSystem}`;
+    return `${baseUrl}/core/${apiEndPoint}?year_month=${selectedDate}&power_plant=${selectedSystem}`;
   }, [apiEndPoint, selectedDate, selectedSystem]);
 
   // Fetch data from the API using useEffect

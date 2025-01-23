@@ -7,14 +7,14 @@ export const useIndivisualPowerGen = (apiEndPoint, searchParams) => {
     const [loading, setLoading] = useState(false);
 
     const { formattedDate, selectedLoggers } = searchParams;
-    const token = process.env.REACT_APP_API_TOKEN;
+    const token = localStorage.getItem('token');
 
     // Build the URL based on search parameters
     const url = useMemo(() => {
         if (!formattedDate || selectedLoggers.length === 0) return null;  // Ensure both params are present
         const baseUrl = process.env.REACT_APP_BASE_URL;
         const loggersQuery = selectedLoggers.length ? `&logger_name=${selectedLoggers.join(',')}` : '';
-        return `${baseUrl}/${apiEndPoint}?year_month=${formattedDate}${loggersQuery}`;
+        return `${baseUrl}/core/${apiEndPoint}?year_month=${formattedDate}${loggersQuery}`;
     }, [apiEndPoint, formattedDate, selectedLoggers]);
 
     useEffect(() => {

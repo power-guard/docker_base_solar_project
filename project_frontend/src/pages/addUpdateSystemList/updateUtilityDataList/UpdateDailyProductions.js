@@ -10,7 +10,7 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
 
 export function UpdateDailyProductions({ apiEndPoint }) {
-  const token = process.env.REACT_APP_API_TOKEN; // Ensure your token is correctly set
+  const token = localStorage.getItem('token'); // Ensure your token is correctly set
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const [searchParams, setSearchParams] = useState({ formattedDate: '', plantIds: [] });
@@ -58,7 +58,7 @@ export function UpdateDailyProductions({ apiEndPoint }) {
     const updatedValue = editState.originalValue;
 
     try {
-      const updateUrl = `${baseUrl}/${apiEndPoint}/${id}/`; // Adjust the URL as needed
+      const updateUrl = `${baseUrl}/core/${apiEndPoint}/${id}/`; // Adjust the URL as needed
 
       // Send the PATCH request to the server to update `power_production_kwh`
       const response = await axios.patch(updateUrl, {

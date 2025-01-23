@@ -25,7 +25,7 @@ export const useUtilityData = (apiEndPoint, searchParams) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const yearMonth = getLastYearMonth();
 
   // Extract search parameters (updated names)
@@ -39,7 +39,7 @@ export const useUtilityData = (apiEndPoint, searchParams) => {
   // Build the URL based on search parameters
   const url = useMemo(() => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    return `${baseUrl}/${apiEndPoint}?rd=${dateParam}${plantParam ? `&plant_id=${plantParam}` : ''}${groupParam ? `&group_name=${groupParam}` : ''}`;
+    return `${baseUrl}/core/${apiEndPoint}?rd=${dateParam}${plantParam ? `&plant_id=${plantParam}` : ''}${groupParam ? `&group_name=${groupParam}` : ''}`;
   }, [apiEndPoint, dateParam, plantParam, groupParam]);
 
   // Debugging logs

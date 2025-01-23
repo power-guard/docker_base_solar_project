@@ -10,7 +10,7 @@ import { GrUpdate } from "react-icons/gr";
 
 
 export function UpdateMonthlyRevenues({ apiEndPoint }) {  
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const [searchParams, setSearchParams] = useState({ formattedDate: '', selectedLoggers: [] });
@@ -61,7 +61,7 @@ export function UpdateMonthlyRevenues({ apiEndPoint }) {
 
   const handleUpdate = async (index, id) => {
     try {
-      const updateUrl = `${baseUrl}/${apiEndPoint}/${id}/`;
+      const updateUrl = `${baseUrl}/core/${apiEndPoint}/${id}/`;
       const response = await axios.patch(updateUrl, editState.fields, {
         headers: {
           Authorization: `Token ${token}`,

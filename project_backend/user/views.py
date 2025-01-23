@@ -1,7 +1,8 @@
 """
 Views for the API user
 """
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
@@ -32,3 +33,12 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         """Retrive and return the authenticated user."""
         return self.request.user
+
+class LogoutView(APIView):
+    """Log out user by deleting the token"""
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        request.user.auth_token.delete()  # Delete the token
+        return Response({"message": "Logged out successfully"})

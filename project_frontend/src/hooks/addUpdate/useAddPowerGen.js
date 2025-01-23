@@ -31,7 +31,7 @@ import { useNotification } from "../index";
 
 // Define your constants
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const TOKEN = process.env.REACT_APP_API_TOKEN;
+const TOKEN = localStorage.getItem('token');
 const HEADERS = {
   Authorization: `Token ${TOKEN}`,
   'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const HEADERS = {
 // Define function to post data
 const postDailyPowerGeneration = async (loggerName, powerGen, date, status) => {
   //console.log(`Preparing to post data:`, { loggerName, powerGen, date });
-  const loggerPowerGenUrl = `${BASE_URL}/logger-power-gen/`;
+  const loggerPowerGenUrl = `${BASE_URL}/core/logger-power-gen/`;
 
   const loggerPowerGenData = {
     logger_name: loggerName,

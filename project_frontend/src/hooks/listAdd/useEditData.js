@@ -11,7 +11,7 @@ export function useEditData(apiEndPoint) {
     originalValues: {},
   });
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
   // Fetch data
@@ -19,7 +19,7 @@ export function useEditData(apiEndPoint) {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${baseUrl}/${apiEndPoint}`, {
+        const response = await axios.get(`${baseUrl}/core/${apiEndPoint}`, {
           headers: { Authorization: `Token ${token}` },
         });
         setListData(response.data);
@@ -58,7 +58,7 @@ export function useEditData(apiEndPoint) {
     const updatedData = editState.originalValues;
     // console.log('Sending update with data:', updatedData);
     try {
-      const response = await axios.patch(`${baseUrl}/${apiEndPoint}/${id}/`, updatedData, {
+      const response = await axios.patch(`${baseUrl}/core/${apiEndPoint}/${id}/`, updatedData, {
         headers: { Authorization: `Token ${token}` },
       });
       const updatedItem = response.data;

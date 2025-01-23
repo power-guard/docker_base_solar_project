@@ -7,13 +7,13 @@ export const usePlantList = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const apiEndPoint = 'utility-plants-list'; // Corrected spelling from "utlity"
 
   // Construct the URL dynamically using useMemo to optimize performance
   const url = useMemo(() => {
     const baseUrl = process.env.REACT_APP_BASE_URL;
-    return `${baseUrl}/${apiEndPoint}`;
+    return `${baseUrl}/core/${apiEndPoint}`;
   }, [apiEndPoint]);
 
   // Fetch data from the API using useEffect

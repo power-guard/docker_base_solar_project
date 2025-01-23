@@ -20,10 +20,10 @@ export const useNotification = (apiEndPoint) => {
     const [missingLoggers, setMissingLoggers] = useState([]); // State to store missing logger names
     const [zeroPowerGen, setZeroPowerGen] = useState([]); // State to store zero logger power gen
 
-    const token = process.env.REACT_APP_API_TOKEN;
+    const token = localStorage.getItem('token');
     const yearMonthDate = getYesterdayDate();
-    const url = `${process.env.REACT_APP_BASE_URL}/${apiEndPoint}?year_month_date=${yearMonthDate}`;
-    const loggerCategoriesUrl = `${process.env.REACT_APP_BASE_URL}/loggercategories`;
+    const url = `${process.env.REACT_APP_BASE_URL}/core/${apiEndPoint}?year_month_date=${yearMonthDate}`;
+    const loggerCategoriesUrl = `${process.env.REACT_APP_BASE_URL}/core/loggercategories`;
 
     useEffect(() => {
         const fetchData = async () => {

@@ -8,7 +8,7 @@ export function AddPowerPlantDetails({ apiEndPoint }) {
   const [errors, setErrors] = useState({}); // State to store field-specific errors
   const [generalError, setGeneralError] = useState(''); // State for general form error message
   
-  const token = process.env.REACT_APP_API_TOKEN;
+  const token = localStorage.getItem('token');
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const { savePlantData, loading, error } = useAddData(apiEndPoint);
 
@@ -33,7 +33,7 @@ export function AddPowerPlantDetails({ apiEndPoint }) {
   useEffect(() => {
     const fetchResourceChoices = async () => {
       try {
-        const response = await fetch(`${baseUrl}/power-plant-resource-choices/`, {
+        const response = await fetch(`${baseUrl}/core/power-plant-resource-choices/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
